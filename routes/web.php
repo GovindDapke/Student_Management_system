@@ -145,7 +145,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('task/list/page', 'taskList')->middleware('auth')->name('task/list/page'); // task/list/page
         Route::get('task/add/page', 'taskAdd')->middleware('auth')->name('task/add/page'); // task/add/page
         Route::post('task/save', 'saveTask')->middleware('auth')->name('task.save'); // task/save
-        Route::post('task/update', 'updateTask')->middleware('auth')->name('task/update'); // task/update
+        Route::post('task/update', 'updateTask')->middleware('auth')->name('task.update'); // task/update
         Route::post('task/delete', 'deleteTask')->middleware('auth')->name('task.delete'); // task/delete
 
         Route::get('task/edit/{task_id}', 'taskEdit')->middleware('auth')->name('task.edit'); // task/edit/{task_id}

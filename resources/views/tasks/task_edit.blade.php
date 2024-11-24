@@ -5,14 +5,14 @@
     <div class="page-wrapper">
         <div class="content container-fluid">
             <h3 class="page-title">Edit Task</h3>
-            <form action="{{ route('tasks.update') }}" method="POST">
+            <form action="{{ route('task.update') }}" method="POST">
                 @csrf
                 <input type="hidden" name="id" value="{{ $task->id }}">
                 <div class="form-group">
                     <label for="student_id">Student</label>
                     <select name="student_id" id="student_id" class="form-control">
                         @foreach($students as $student)
-                            <option value="{{ $student->id }}" {{ $task->student_id == $student->id ? 'selected' : '' }}>{{ $student->name }}</option>
+                            <option value="{{ $student->id }}" {{ $task->student_id == $student->id ? 'selected' : '' }}>{{ $student->user->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -20,7 +20,7 @@
                     <label for="teacher_id">Teacher</label>
                     <select name="teacher_id" id="teacher_id" class="form-control">
                         @foreach($teachers as $teacher)
-                            <option value="{{ $teacher->id }}" {{ $task->teacher_id == $teacher->id ? 'selected' : '' }}>{{ $teacher->name }}</option>
+                            <option value="{{ $teacher->id }}" {{ $task->teacher_id == $teacher->id ? 'selected' : '' }}>{{ $teacher->user->name }}</option>
                         @endforeach
                     </select>
                 </div>
