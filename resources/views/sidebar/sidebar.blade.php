@@ -4,6 +4,7 @@
             <ul>
                 <li class="menu-title">
                     <span>Main Menu</span>
+                    
                 </li>
 
                 <li class="submenu {{set_active(['home','teacher/dashboard','student/dashboard'])}}">
@@ -36,9 +37,9 @@
                         <li><a href="{{ route('list/users') }}" class="{{set_active(['list/users'])}} {{ (request()->is('view/user/edit/*')) ? 'active' : '' }}">List Users</a></li>
                     </ul>
                 </li>
-                @endif
-
               
+            
+
                 <li class="submenu {{set_active(['student/list','student/grid','student/add/page'])}} {{ (request()->is('student/edit/*')) ? 'active' : '' }} {{ (request()->is('student/profile/*')) ? 'active' : '' }}">
                     <a href="#"><i class="fas fa-graduation-cap"></i>
                         <span> Students</span>
@@ -117,7 +118,7 @@
                         <li><a>Task Edit</a></li>
                     </ul>
                 </li>
-               
+@endif
             </ul>
         </div>
     </div>
