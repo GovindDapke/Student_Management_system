@@ -64,16 +64,16 @@ class LoginController extends Controller
             'email'    => 'required|string',
             'password' => 'required|string',
         ]);
-        
+    
         DB::beginTransaction();
         try {
-            
+    
             $email     = $request->email;
             $password  = $request->password;
-
+    
             if (Auth::attempt(['email'=>$email,'password'=>$password])) {
                 /** get session */
-                $user = Auth::User();
+                $user = Auth::user();
                 Session::put('name', $user->name);
                 Session::put('email', $user->email);
                 Session::put('user_id', $user->user_id);
@@ -84,19 +84,28 @@ class LoginController extends Controller
                 Session::put('avatar', $user->avatar);
                 Session::put('position', $user->position);
                 Session::put('department', $user->department);
-                Toastr::success('Login successfully :)','Success');
-                return redirect()->route('home');
+    
+                // Check the user's role and redirect accordingly
+                if ($user->role_name == 'Teacher') {
+                    return redirect()->route('teacher/dashboard');  // Redirect to teacher's dashboard
+                }
+               
+    
+                Toastr::success('Login successfully :)', 'Success');
+                return redirect()->route('home');  // Redirect to home page if not a teacher
+    
             } else {
-                Toastr::error('fail, WRONG USERNAME OR PASSWORD :)','Error');
+                Toastr::error('Fail, WRONG USERNAME OR PASSWORD :)', 'Error');
                 return redirect('login');
             }
-           
-        } catch(\Exception $e) {
+    
+        } catch (\Exception $e) {
             DB::rollback();
-            Toastr::error('fail, LOGIN :)','Error');
+            Toastr::error('Fail, LOGIN :)', 'Error');
             return redirect()->back();
         }
     }
+    
 
     /** logout */
     public function logout( Request $request)
